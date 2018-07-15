@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using JokLibs.M2File;
+using JokLibs.M2Skel;
 
 namespace JokLibs.M2Reader
 {
@@ -10,6 +11,7 @@ namespace JokLibs.M2Reader
     {
         public static BinaryReader reader;
         public static M2 openedFile;
+        public static M2SkeletonFile openedSkel;
         public static string filePath;
         public static bool isLegion;
         public static long oldPos;
@@ -29,6 +31,13 @@ namespace JokLibs.M2Reader
         {
             reader = r;
             openedFile = m;
+            filePath = f;
+        }
+
+        public static void StartSkel(BinaryReader r, M2SkeletonFile s, string f)
+        {
+            reader = r;
+            openedSkel = s;
             filePath = f;
         }
 
@@ -557,6 +566,16 @@ namespace JokLibs.M2Reader
             if (Encoding.UTF8.GetString(fileData).Contains("SKID"))
             {
                 Console.WriteLine("SKID chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("TXID"))
+            {
+                Console.WriteLine("TXID chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("LDV1"))
+            {
+                Console.WriteLine("LDV1 chunk found.");
             }
         }
     }

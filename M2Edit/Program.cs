@@ -7,12 +7,35 @@ using System.Reflection;
 using System.Text;
 using JokLibs.M2File;
 using JokLibs.M2Reader;
+using JokLibs.M2Skel;
+using JokLibs.M2SkelReader;
 
 namespace M2Edit
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            var file = @"C:\Users\Jok\source\repos\WoWM2Reader\WoWM2Reader\bin\Debug\netcoreapp2.0\lightforgeddraeneifemale.skel";
+
+            using (BinaryReader reader = new BinaryReader(File.Open(file, FileMode.Open)))
+            {
+                M2SkeletonFile skel = new M2SkeletonFile();
+                M2SkelReader.Start(reader, skel, file);
+
+                M2SkelReader.ReadHeaderChunk();
+                M2SkelReader.ReadAnimationsChunk();
+
+                foreach (var prop in skel.GetType().GetProperties())
+                {
+                    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(skel, null));
+                }
+
+                Console.ReadLine();
+            }
+        }
+
+        public static void M2ReadAlmostComplete()
         {
             Stopwatch time = new Stopwatch();
             time.Start();
