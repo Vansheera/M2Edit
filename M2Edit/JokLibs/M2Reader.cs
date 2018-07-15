@@ -10,6 +10,7 @@ namespace JokLibs.M2Reader
     {
         public static BinaryReader reader;
         public static M2 openedFile;
+        public static string filePath;
         public static bool isLegion;
         public static long oldPos;
 
@@ -24,10 +25,11 @@ namespace JokLibs.M2Reader
             Console.WriteLine("[{0}]", string.Join(", ", a));
         }
 
-        public static void Start(BinaryReader r, M2 m)
+        public static void Start(BinaryReader r, M2 m, string f)
         {
             reader = r;
             openedFile = m;
+            filePath = f;
         }
 
         public static void LegionOrNot()
@@ -490,6 +492,71 @@ namespace JokLibs.M2Reader
             for (int i = 0; i < openedFile.camerasLookNum; i++)
             {
                 openedFile.camerasLookups.Add(reader.ReadUInt16());
+            }
+        }
+
+        public static void LookLegionChunk()
+        {
+            byte[] fileData = File.ReadAllBytes(filePath);
+
+            if (Encoding.UTF8.GetString(fileData).Contains("PFID"))
+            {
+                Console.WriteLine("PFID chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("SFID"))
+            {
+                Console.WriteLine("SFID chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("AFID"))
+            {
+                Console.WriteLine("AFID chunk  found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("BFID"))
+            {
+                Console.WriteLine("BFID chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("TXAC"))
+            {
+                Console.WriteLine("TXAC chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("EXPT"))
+            {
+                Console.WriteLine("EXPT chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("EXP2"))
+            {
+                Console.WriteLine("EXP2 chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("PABC"))
+            {
+                Console.WriteLine("PABC chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("PADC"))
+            {
+                Console.WriteLine("PADC chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("PSBC"))
+            {
+                Console.WriteLine("PSBC chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("PEDC"))
+            {
+                Console.WriteLine("PEDC chunk found.");
+            }
+
+            if (Encoding.UTF8.GetString(fileData).Contains("SKID"))
+            {
+                Console.WriteLine("SKID chunk found.");
             }
         }
     }

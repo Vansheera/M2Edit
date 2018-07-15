@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,12 +14,15 @@ namespace M2Edit
     {
         static void Main(string[] args)
         {
+            Stopwatch time = new Stopwatch();
+            time.Start();
+
             var file = @"C:\Users\Jok\source\repos\WoWM2Reader\WoWM2Reader\bin\Debug\netcoreapp2.0\humanmale_HD.m2";
 
             using (BinaryReader reader = new BinaryReader(File.Open(file, FileMode.Open)))
             {
                 M2 readed = new M2();
-                M2Reader.Start(reader, readed);
+                M2Reader.Start(reader, readed, file);
 
                 readed.magic = reader.ReadUInt32();
 
@@ -71,9 +75,13 @@ namespace M2Edit
                 Console.WriteLine($"events={readed.events.Count()}");
                 Console.WriteLine($"cameras={readed.cameras.Count()}");
                 Console.WriteLine($"camerasLookups={readed.camerasLookups.Count()}");
-
-                Console.Read();
             }
+
+            M2Reader.LookLegionChunk();
+            time.Stop();
+            TimeSpan ts = time.Elapsed;
+            Console.WriteLine(string.Format("Elapsed time: {0}:{1}", Math.Floor(ts.TotalMinutes), ts.ToString("ss\\.ff")));
+            Console.Read();
         }
     }
 }

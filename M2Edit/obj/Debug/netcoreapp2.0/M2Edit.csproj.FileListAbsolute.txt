@@ -8,3 +8,4 @@ C:\Users\Jok\source\repos\M2Edit\M2Edit\obj\Debug\netcoreapp2.0\M2Edit.AssemblyI
 C:\Users\Jok\source\repos\M2Edit\M2Edit\obj\Debug\netcoreapp2.0\M2Edit.AssemblyInfo.cs
 C:\Users\Jok\source\repos\M2Edit\M2Edit\obj\Debug\netcoreapp2.0\M2Edit.dll
 C:\Users\Jok\source\repos\M2Edit\M2Edit\obj\Debug\netcoreapp2.0\M2Edit.pdb
+C:\Users\Jok\source\repos\M2Edit\M2Edit\obj\Debug\netcoreapp2.0\M2Edit.csprojAssemblyReference.cache
