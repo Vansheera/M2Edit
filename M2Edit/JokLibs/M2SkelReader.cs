@@ -128,47 +128,12 @@ namespace JokLibs.M2SkelReader
 
         public static void ReadBones()
         {
-            for (int i = 0; i < openedFile.bones.bonesNum; i++)
-            {
-                M2Bones bone = new M2Bones();
-                bone.keyBoneId = reader.ReadUInt32();
-                bone.flags = reader.ReadUInt32();
-                bone.parentBone = reader.ReadUInt16();
-                bone.subMeshId = reader.ReadUInt16();
-                bone.unk = new uint[] { reader.ReadUInt16(), reader.ReadUInt16() };
-
-                /* Translation TODO FUNCTION get values */
-                bone.translationHeader = new uint[] { reader.ReadUInt16(), reader.ReadUInt16() };
-                bone.translationTimestampNb = reader.ReadUInt32();
-                bone.translationTimestampPos = reader.ReadUInt32();
-                bone.translationKeysNb = reader.ReadUInt32();
-                bone.translationKeysPos = reader.ReadUInt32();
-
-                /* Rotation TODO FUNCTION get values */
-                bone.rotationHeader = new uint[] { reader.ReadUInt16(), reader.ReadUInt16() };
-                bone.rotationTimestampNb = reader.ReadUInt32();
-                bone.rotationTimestampPos = reader.ReadUInt32();
-                bone.rotationKeysNb = reader.ReadUInt32();
-                bone.rotationKeysPos = reader.ReadUInt32();
-
-                /* Scale TODO FUNCTION get values */
-                bone.scaleHeader = new uint[] { reader.ReadUInt16(), reader.ReadUInt16() };
-                bone.rotationTimestampNb = reader.ReadUInt32();
-                bone.rotationTimestampPos = reader.ReadUInt32();
-                bone.rotationKeysNb = reader.ReadUInt32();
-                bone.rotationKeysPos = reader.ReadUInt32();
-
-                bone.pivot = new float[] { reader.ReadUInt32(), reader.ReadUInt32(), reader.ReadUInt32() };
-                openedFile.bones.bones.Add(bone);
-            }
+            /* Need to be redone, fail on somes .skel */
         }
 
         public static void ReadBonesLookup()
         {
-            for (int i = 0; i < openedFile.keyBoneNum; i++)
-            {
-                openedFile.bones.bonesLookups.Add(reader.ReadUInt16());
-            }
+            /* TODO */
         }
     }
 }
