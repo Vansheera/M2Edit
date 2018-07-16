@@ -16,7 +16,7 @@ namespace M2Edit
     {
         static void Main(string[] args)
         {
-            var file = @"C:\Users\Jok\source\repos\WoWM2Reader\WoWM2Reader\bin\Debug\netcoreapp2.0\lightforgeddraeneifemale.skel";
+            var file = @"C:\Users\Jok\source\repos\WoWM2Reader\WoWM2Reader\bin\Debug\netcoreapp2.0\darkirondwarfmale.skel";
 
             using (BinaryReader reader = new BinaryReader(File.Open(file, FileMode.Open)))
             {
@@ -24,12 +24,17 @@ namespace M2Edit
                 M2SkelReader.Start(reader, skel, file);
 
                 M2SkelReader.ReadHeaderChunk();
-                M2SkelReader.ReadAnimationsChunk();
 
-                foreach (var prop in skel.GetType().GetProperties())
-                {
-                    Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(skel, null));
-                }
+                /* Animations Chunk */
+                M2SkelReader.ReadAnimationsChunk();
+                M2SkelReader.ReadGlobalLoops();
+                M2SkelReader.ReadSequences();
+                /* M2SkelReader.ReadSequencesLookups(); < need testing with skel 
+                 who have sequences lookups*/
+
+                /* Bones Chunk */
+                M2SkelReader.ReadBonesChunk();
+                M2SkelReader.ReadBones();
 
                 Console.ReadLine();
             }
